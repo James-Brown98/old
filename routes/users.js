@@ -1,9 +1,16 @@
 var express = require('express');
 var router = express.Router();
+var imageDb = require('../db/image.js')
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.get('/', function(req, res) {
+  imageDb.getImage()
+  .then(function(text){
+  res.render('users', { text: text });
+  })
+  .catch(function(err){
+    console.log(err);
+  })
 });
+
 
 module.exports = router;
